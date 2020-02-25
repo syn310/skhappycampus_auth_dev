@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: skhappycampus-auth-deployment
+  labels:
+    app: skhappycampus-auth
+spec:
+  replicas: 2
+  minReadySeconds: 10
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  selector:
+    matchLabels:
+      run: skhappycampus-auth
+  template:
+    metadata: 
+      labels:
+        run: skhappycampus-auth
+    spec:
+      containers:
+      - name: skhappycampus-auth
+        image: mgmtsv-registry.cloudzcp.io/skhappycampus/skhappycampus-auth:1
+        ports: 
+        - containerPort: 8081
+        imagePullPolicy: Always
+        resources:
+          requests:
+            memory: "400Mi"
+            cpu: "100m"
+          limits:
+            memory: "800Mi"
+            cpu: "200m"

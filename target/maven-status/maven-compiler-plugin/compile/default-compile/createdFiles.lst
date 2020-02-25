@@ -1,0 +1,4 @@
+com\auth\model\embeddedid\AuthResultKey.class
+com\auth\model\repository\AuthResultRepository.class
+com\auth\AuthApplication.class
+com\auth\model\entity\AuthResult.class

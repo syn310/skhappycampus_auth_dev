@@ -1,0 +1,9 @@
+-------------------------------------------------------------------------------
+Test set: com.auth.AuthApplicationTests
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 5.59 s <<< FAILURE! - in com.auth.AuthApplicationTests
+contextLoads(com.auth.AuthApplicationTests)  Time elapsed: 0.013 s  <<< ERROR!
+java.lang.IllegalStateException: Failed to load ApplicationContext
+Caused by: org.springframework.context.ApplicationContextException: Failed to start bean 'subProtocolWebSocketHandler'; nested exception is java.lang.IllegalArgumentException: No handlers
+Caused by: java.lang.IllegalArgumentException: No handlers
+
