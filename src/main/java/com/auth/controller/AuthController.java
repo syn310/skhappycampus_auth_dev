@@ -100,10 +100,10 @@ public class AuthController {
 		// CheckPlus(본인인증) 처리 후, 결과 데이타를 리턴 받기위해 다음예제와 같이 http부터 입력합니다.
 		// 리턴url은 인증 전 인증페이지를 호출하기 전 url과 동일해야 합니다. ex) 인증 전 url : http://www.~ 리턴 url :
 		// http://www.~
-		String sReturnUrl = "https://www.skhappycampus.com/auth/nice/success";
-		String sErrorUrl = "https://www.skhappycampus.com/auth/nice/fail";
-//		String sReturnUrl = "http://192.168.0.10:8081/nice/success";
-//		String sErrorUrl = "http://192.168.0.10:8081/nice/fail";
+//		String sReturnUrl = "https://www.skhappycampus.com/auth/nice/success";
+//		String sErrorUrl = "https://www.skhappycampus.com/auth/nice/fail";
+		String sReturnUrl = "http://192.168.0.8:8081/nice/success";
+		String sErrorUrl = "http://192.168.0.8:8081/nice/fail";
 
 		// 입력될 plain 데이타를 만든다.
 		String sPlainData = "7:REQ_SEQ" + sRequestNumber.getBytes().length + ":" + sRequestNumber + "8:SITECODE"
