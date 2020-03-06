@@ -20,6 +20,7 @@ import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -102,8 +103,8 @@ public class AuthController {
 		// http://www.~
 //		String sReturnUrl = "https://www.skhappycampus.com/auth/nice/success";
 //		String sErrorUrl = "https://www.skhappycampus.com/auth/nice/fail";
-		String sReturnUrl = "http://192.168.0.8:8081/nice/success";
-		String sErrorUrl = "http://192.168.0.8:8081/nice/fail";
+		String sReturnUrl = "http://192.168.0.13:8081/nice/success";
+		String sErrorUrl = "http://192.168.0.13:8081/nice/fail";
 
 		// 입력될 plain 데이타를 만든다.
 		String sPlainData = "7:REQ_SEQ" + sRequestNumber.getBytes().length + ":" + sRequestNumber + "8:SITECODE"
@@ -134,6 +135,7 @@ public class AuthController {
 		Map<String, String> resultMap = new HashMap<String, String>();
 		resultMap.put("message", sMessage);
 		resultMap.put("encData", sEncData);
+		
 		return new ResponseEntity<Map<String, String>>(resultMap, HttpStatus.OK);
 	}
 
@@ -141,7 +143,8 @@ public class AuthController {
 	@ResponseBody
 	private ResponseEntity<Map<String,String>> refresh(String token, String serialNum) {
 
-		final String url = "https://www.skhappycampus.com/api/authNice/refreshNice/"+serialNum;
+//		final String url = "https://www.skhappycampus.com/api/authNice/refreshNice/"+serialNum;
+		final String url = "http://192.168.0.13:3006/authNice/refreshNice/"+serialNum;
 
 		HttpHeaders headers = new HttpHeaders();
 		headers.set(JWT_HEADER, token);
@@ -168,7 +171,7 @@ public class AuthController {
 	 * @return
 	 */
 	@CrossOrigin("*")
-	@PostMapping("/success")
+	@GetMapping("/success")
 	public String success(HttpServletRequest request, Model model) {
 
 		NiceID.Check.CPClient niceCheck = new NiceID.Check.CPClient();
@@ -194,6 +197,8 @@ public class AuthController {
 		String noticeMessage = "F";
 
 		int iReturn = niceCheck.fnDecode(sSiteCode, sSitePassword, sEncodeData);
+		
+		System.out.println("iReturn===== " + iReturn);
 
 		if (iReturn == 0) {
 
@@ -212,7 +217,7 @@ public class AuthController {
 			sResponseNumber = (String) mapresult.get("RES_SEQ");
 			sAuthType = (String) mapresult.get("AUTH_TYPE");
 			sName = (String) mapresult.get("NAME");
-			// sName = (String)mapresult.get("UTF8_NAME"); //charset utf8 사용시 주석 해제 후 사용
+//			sName = (String)mapresult.get("UTF8_NAME"); //charset utf8 사용시 주석 해제 후 사용
 			sBirthDate = (String) mapresult.get("BIRTHDATE");
 			sGender = (String) mapresult.get("GENDER");
 			sNationalInfo = (String) mapresult.get("NATIONALINFO");
